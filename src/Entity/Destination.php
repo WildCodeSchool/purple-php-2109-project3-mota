@@ -27,12 +27,12 @@ class Destination
     /**
      * @ORM\Column(type="date")
      */
-    private int $start_date;
+    private ?\DateTimeInterface $startDate;
 
     /**
      * @ORM\Column(type="date")
      */
-    private int $end_date;
+    private ?\DateTimeInterface $endDate;
 
     /**
      * @ORM\Column(type="text")
@@ -42,7 +42,7 @@ class Destination
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private string $images;
+    private ?string $images;
 
     /**
      * @ORM\Column(type="text")
@@ -57,17 +57,17 @@ class Destination
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="destination")
      */
-    private int $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="destination")
      */
-    private int $categories;
+    private Collection $categories;
 
     /**
      * @ORM\OneToMany(targetEntity=pictures::class, mappedBy="destination")
      */
-    private  int $pictures;
+    private Collection $pictures;
 
     public function __construct()
     {
@@ -94,24 +94,24 @@ class Destination
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $start_date): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
-        $this->start_date = $start_date;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $end_date): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
@@ -204,14 +204,14 @@ class Destination
     }
 
     /**
-     * @return Collection|pictures[]
+     * @return Collection|Pictures[]
      */
     public function getPictures(): Collection
     {
         return $this->pictures;
     }
 
-    public function addPicture(pictures $picture): self
+    public function addPicture(Pictures $picture): self
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures[] = $picture;
@@ -221,7 +221,7 @@ class Destination
         return $this;
     }
 
-    public function removePicture(pictures $picture): self
+    public function removePicture(Pictures $picture): self
     {
         if ($this->pictures->removeElement($picture)) {
             // set the owning side to null (unless already changed)

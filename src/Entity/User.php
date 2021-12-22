@@ -37,17 +37,17 @@ class User
     /**
      * @ORM\OneToMany(targetEntity=destination::class, mappedBy="user")
      */
-    private int $destination;
+    private ArrayCollection $destination;
 
     /**
      * @ORM\OneToMany(targetEntity=category::class, mappedBy="user")
      */
-    private int $category;
+    private ArrayCollection $category;
 
     /**
      * @ORM\OneToMany(targetEntity=pictures::class, mappedBy="user")
      */
-    private int $pictures;
+    private ArrayCollection $pictures;
 
     public function __construct()
     {
@@ -98,14 +98,14 @@ class User
     }
 
     /**
-     * @return Collection|destination[]
+     * @return Collection|Destination[]
      */
     public function getDestination(): Collection
     {
         return $this->destination;
     }
 
-    public function addDestination(destination $destination): self
+    public function addDestination(Destination $destination): self
     {
         if (!$this->destination->contains($destination)) {
             $this->destination[] = $destination;
@@ -115,7 +115,7 @@ class User
         return $this;
     }
 
-    public function removeDestination(destination $destination): self
+    public function removeDestination(Destination $destination): self
     {
         if ($this->destination->removeElement($destination)) {
             // set the owning side to null (unless already changed)
@@ -128,14 +128,14 @@ class User
     }
 
     /**
-     * @return Collection|category[]
+     * @return Collection|Category[]
      */
     public function getCategory(): Collection
     {
         return $this->category;
     }
 
-    public function addCategory(category $category): self
+    public function addCategory(Category $category): self
     {
         if (!$this->category->contains($category)) {
             $this->category[] = $category;
@@ -145,7 +145,7 @@ class User
         return $this;
     }
 
-    public function removeCategory(category $category): self
+    public function removeCategory(Category $category): self
     {
         if ($this->category->removeElement($category)) {
             // set the owning side to null (unless already changed)
@@ -158,14 +158,14 @@ class User
     }
 
     /**
-     * @return Collection|pictures[]
+     * @return Collection|Pictures[]
      */
     public function getPictures(): Collection
     {
         return $this->pictures;
     }
 
-    public function addPicture(pictures $picture): self
+    public function addPicture(Pictures $picture): self
     {
         if (!$this->pictures->contains($picture)) {
             $this->pictures[] = $picture;
@@ -175,7 +175,7 @@ class User
         return $this;
     }
 
-    public function removePicture(pictures $picture): self
+    public function removePicture(Pictures $picture): self
     {
         if ($this->pictures->removeElement($picture)) {
             // set the owning side to null (unless already changed)

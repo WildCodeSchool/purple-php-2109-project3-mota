@@ -29,13 +29,14 @@ class Pictures
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pictures")
+     * @ORM\Column(type="integer", length=255)
      */
-    private int $user;
+    private ?User $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Destination::class, inversedBy="pictures")
      */
-    private int $destination;
+    private ?Destination $destination;
 
     public function getId(): ?int
     {

@@ -27,12 +27,12 @@ class Category
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="category")
      */
-    private int $user;
+    private ?User $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=destination::class, inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Destination::class, inversedBy="categories")
      */
-    private int $destination;
+    private Collection $destination;
 
     public function __construct()
     {
@@ -69,14 +69,14 @@ class Category
     }
 
     /**
-     * @return Collection|destination[]
+     * @return Collection|Destination[]
      */
     public function getDestination(): Collection
     {
         return $this->destination;
     }
 
-    public function addDestination(destination $destination): self
+    public function addDestination(Destination $destination): self
     {
         if (!$this->destination->contains($destination)) {
             $this->destination[] = $destination;
@@ -85,7 +85,7 @@ class Category
         return $this;
     }
 
-    public function removeDestination(destination $destination): self
+    public function removeDestination(Destination $destination): self
     {
         $this->destination->removeElement($destination);
 
